@@ -6,7 +6,7 @@ This project implements a C++ client for interacting with the Deribit trading pl
 ## Features
 
 - **Authentication**: OAuth 2.0 authentication to obtain an access token using `client_id` and `client_secret`.
-- **Public API**: Fetches order book details for a specified instrument.
+- **Public API**: Fetches order book details for a subscribed instrument,fetches current position and market data.
 - **Private API**: Places buy, sell,modify and cancel orders.
 
 ## Dependencies
@@ -18,33 +18,27 @@ This project uses the following libraries:
 - `libboost-all-dev`: Provides Boost.Asio for WebSocket handling.
 
 
-### Installing vcpkg
+### Installing dependencies for Ubuntu
    1. Package manager for c++.
    ```bash
-   git clone https://github.com/microsoft/vcpkg.git
-   cd vcpkg
-   .\bootstrap-vcpkg.bat
-   .\vcpkg integrate install
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install -y build-essential cmake git curl wget libssl-dev libboost-all-dev
+    sudo apt install -y nlohmann-json3-dev
+    sudo apt install -y libboost-dev
+
    ```
-
-### Installing Dependencies with vcpkg
-   1. Install `vcpkg` following the instructions on [vcpkg GitHub](https://github.com/microsoft/vcpkg).
-   2. Install dependencies:
-
-      ```bash
-      vcpkg install curl
-      vcpkg install nlohmann-json
-      ```
-
 ## Setup & Run
 1. Clone the repo.
    ```bash
-   git clone https://github.com/chilkaditya/DeribitTrader.git
-   cd DeribitTrader
+   git clone https://github.com/chilkaditya/OEMS.git
+   cd OEMS
    ```
-2. Build using make (you can use your fav build system).
+2. Build using Cmake (you can use your fav build system).
    ```bash
-   make
+   makdir build
+   cd build
+   cmake ..
+   make -j$(nproc)
    ./your_exe_file.exe
    ```
 
