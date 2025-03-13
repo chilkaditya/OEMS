@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wall -Wextra -O2 CMakeFiles/trading_system.dir/src/main.cpp.o -o trading_system  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0 /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.83.0 -lpthread -lssl -lcrypto /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.83.0 

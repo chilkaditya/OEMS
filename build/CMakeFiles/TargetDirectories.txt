@@ -1,0 +1,3 @@
+/home/chilka/OEMS/build/CMakeFiles/trading_system.dir
+/home/chilka/OEMS/build/CMakeFiles/edit_cache.dir
+/home/chilka/OEMS/build/CMakeFiles/rebuild_cache.dir
