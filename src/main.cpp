@@ -164,9 +164,9 @@ public:
 
         json json_response = json::parse(response);
         if (json_response.contains("result") && json_response["result"].contains("order")) {
-            std::cout << "Order Modified Successfully! New Order ID: " << json_response["result"]["order"]["order_id"] << "\n";
+            std::cout << "✅ Order Modified Successfully! New Order ID: " << json_response["result"]["order"]["order_id"] << "\n";
         } else {
-            std::cerr << "Order Modification Failed!\n";
+            std::cerr << "❌ Order Modification Failed!\n";
         }
     }
 
@@ -188,14 +188,14 @@ public:
         sendMessage(subscribe_request.dump());
 
         std::string response = receiveMessage();
-        std::cout << "Subscription Response: " << response << "\n";
+        // std::cout << "Subscription Response: " << response << "\n";
     }
 
     // Function to continuously receive and process market data
     void processMarketData() {
         while (true) {
             std::string message = receiveMessage();
-            std::cout << "Subscription Response: " << message << "\n";
+            std::cout << "✅ Subscription Response: " << message << "\n";
             // json json_message = json::parse(message);
 
             // if (json_message.contains("params") && json_message["params"].contains("channel")) {
@@ -228,7 +228,7 @@ public:
     void getPositions(const std::string& currency, const std::string& kind) {
         json position_request = {
             {"jsonrpc", "2.0"},
-            {"id", 1234},
+            {"id", 2236},
             {"method", "private/get_positions"},
             {"params", {
                 {"currency", currency},
@@ -239,6 +239,7 @@ public:
 
         sendMessage(position_request.dump());
         std::string response = receiveMessage();
+        std::cout << "✅ Positions response :" << response << std::endl;
         json json_response = json::parse(response);
 
         if (json_response.contains("result") && !json_response["result"].empty()) {
@@ -250,7 +251,7 @@ public:
                           << " | PnL: " << position["floating_profit_loss"] << "\n";
             }
         } else {
-            std::cout << "ℹ No open positions.\n";
+            std::cout << " No open positions.\n";
         }
     }
 };
@@ -260,12 +261,15 @@ int main() {
         DeribitClient client;
 
         // Place an order
-        std::string order_id = client.placeOrder("buy", "BTC-21MAR25", 10);
+        // std::string order_id = client.placeOrder("buy", "BTC-21MAR25", 10);
 
-        // Cancel order if it was placed successfully
-        if (!order_id.empty()) {
-            client.cancelOrder(order_id);
-        }
+        // // // Cancel order if it was placed successfully
+        // // if (!order_id.empty()) {
+            // client.modifyOrder("37953699932",20,20);
+            // client.cancelOrder("37953699932");
+            // client.cancelOrder("37953848470");
+
+        // // }
 
         // Subscribe to market data for ETH-PERPETUAL
         client.subscribeMarketData("ETH-PERPETUAL");
@@ -273,8 +277,8 @@ int main() {
         // Process incoming market data
         client.processMarketData();
 
-        // Get positions
-        client.getPositions("ETH", "future");
+        // // Get positions
+        // client.getPositions("BTC", "future");
 
     } catch (const std::exception& e) {
         std::cerr << "❌ Error: " << e.what() << std::endl;
